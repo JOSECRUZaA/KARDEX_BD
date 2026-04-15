@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title if title else "Kardex" }}</title>
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --text: #111827;
+      --primary: #1b9f57;
+      --primary-hover: #168a4b;
+      --warning: #facc15;
+      --warning-hover: #eab308;
+      --danger: #e11d48;
+      --danger-hover: #be123c;
+      --border: #e5e7eb;
+      --success-bg: #ecfdf3;
+      --success-text: #067647;
+      --error-bg: #fef3f2;
+      --error-text: #b42318;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .container {
+      max-width: 980px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      color: #374151;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+      font-size: 2.15rem;
+      font-weight: 700;
+    }
+    .form-card h2 { font-size: 2rem; }
+    .hero-card { margin-bottom: 1.6rem; }
+    .list-card {
+      max-width: 940px;
+      margin: 0 auto;
+    }
+    .form-grid { display: grid; gap: 0.75rem; }
+    label { display: grid; gap: 0.35rem; font-weight: 600; }
+    input {
+      padding: 0.6rem 0.7rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    button, a {
+      display: inline-block;
+      border: none;
+      border-radius: 9px;
+      padding: 0.45rem 0.9rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    button { background: var(--primary); color: #fff; cursor: pointer; }
+    button:hover { background: var(--primary-hover); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      padding: 0.8rem 0.75rem;
+    }
+    thead th { background: #111827; color: #f9fafb; font-size: 0.95rem; }
+    .actions { display: flex; gap: 0.5rem; align-items: center; }
+    .btn-nuevo { background: var(--primary); color: #fff; }
+    .btn-nuevo:hover { background: var(--primary-hover); }
+    .btn-editar { background: var(--warning); color: #111827; }
+    .btn-editar:hover { background: var(--warning-hover); }
+    .btn-eliminar { background: var(--danger); }
+    .btn-eliminar:hover { background: var(--danger-hover); }
+    .btn-eliminar, .btn-editar, .btn-nuevo {
+      min-width: 0;
+    }
+    .alerts { margin-bottom: 1rem; }
+    .alert {
+      padding: 0.7rem 0.85rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .alert.success { background: var(--success-bg); color: var(--success-text); }
+    .alert.error { background: var(--error-bg); color: var(--error-text); }
+    .actions-row { display: flex; gap: 0.5rem; }
+    .secondary { background: #e4ebf7; color: #23324f; }
+    @media (max-width: 600px) {
+      .container { margin-top: 1rem; }
+      .card h2 { font-size: 1.8rem; }
+      th, td { font-size: 0.95rem; }
+      .actions { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Kardex</h1>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <section class="alerts">
+          {% for category, message in messages %}
+            <div class="alert {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

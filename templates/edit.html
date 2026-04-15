@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h2>Editar registro #{{ persona.id }}</h2>
+  <form action="{{ url_for('edit_person', persona_id=persona.id) }}" method="post" class="form-grid">
+    <label>
+      Nombre
+      <input type="text" name="nombre" value="{{ persona.nombre }}" required>
+    </label>
+    <label>
+      Telefono
+      <input type="text" name="telefono" value="{{ persona.telefono }}" required>
+    </label>
+    <label>
+      Fecha de nacimiento
+      <input type="date" name="fecha_nac" value="{{ persona.fecha_nac }}" required>
+    </label>
+    <div class="actions-row">
+      <button type="submit">Actualizar</button>
+      <a href="{{ url_for('index') }}" class="secondary">Cancelar</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

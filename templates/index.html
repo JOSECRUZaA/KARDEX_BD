@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card hero-card">
+  <h2>Listado de personas</h2>
+  <a href="{{ url_for('create_person') }}" class="btn-nuevo">Nuevo registro</a>
+</section>
+
+<section class="card list-card">
+  {% if personas %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Fecha Nac</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for persona in personas %}
+            <tr>
+              <td>{{ persona.id }}</td>
+              <td>{{ persona.nombre }}</td>
+              <td>{{ persona.telefono }}</td>
+              <td>{{ persona.fecha_nac }}</td>
+              <td class="actions">
+                <a href="{{ url_for('edit_person', persona_id=persona.id) }}" class="btn-editar">Editar</a>
+                <form action="{{ url_for('delete_person', persona_id=persona.id) }}" method="post" onsubmit="return confirm('¿Eliminar este registro?');">
+                  <button type="submit" class="btn-eliminar">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>No hay registros todavía.</p>
+  {% endif %}
+</section>
+{% endblock %}

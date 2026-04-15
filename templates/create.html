@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card form-card">
+  <h2>Nuevo registro</h2>
+  <form action="{{ url_for('create_person') }}" method="post" class="form-grid">
+    <label>
+      Nombre
+      <input type="text" name="nombre" required>
+    </label>
+    <label>
+      Telefono
+      <input type="text" name="telefono" required>
+    </label>
+    <label>
+      Fecha de nacimiento
+      <input type="date" name="fecha_nac" required>
+    </label>
+    <div class="actions-row">
+      <button type="submit">Guardar</button>
+      <a href="{{ url_for('index') }}" class="secondary">Cancelar</a>
+    </div>
+  </form>
+</section>
+{% endblock %}
